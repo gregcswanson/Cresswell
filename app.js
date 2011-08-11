@@ -1,5 +1,6 @@
 var express = require('express');
 var models = require('./models');
+var JaysProvider = require('./jays-memory').JaysProvider;
 var app = module.exports = express.createServer();
 
 // Configuration
@@ -24,16 +25,42 @@ app.configure('production', function(){
    app.use(express.errorHandler()); 
 });
 
+var jayProvider = new JayProvider();
+
 // Routes
 
 app.get('/', function(req, res){
+    jayProvider.findAll(function(error, jays)
+    {
+        res.render('index.jade', { locals: {
+            layout: false,
+            title: 'Blog',
+            jays: jays
+            }
+        });
+        
+    });
+    //models.getJay('a',function(jay){
+    //    res.render('start', {
+    //        layout: false,
+    //        title: jay.title
+    //    });
+    //});
+});
+
+app.get('/m', function(req, res){
     models.getJay('a',function(jay){
-        res.render('start', {
+        res.render('mobile', {
             layout: false,
             title: jay.title
         });
     });
 });
 
+app.get('/c', function(req, res){
+    res.render('cats', {
+        layout: false
+    });
+});
+
 app.listen(process.env.C9_PORT, "0.0.0.0");
-console.log("Express server has started.");

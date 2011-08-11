@@ -1,0 +1,13 @@
+!!! 5
+html(lang="en")
+    head
+        title= title        
+    body
+        h1= title
+        #jays
+            - each jay in jays
+                div.jay
+                    div.created_at= jay.created_at
+                    div.title
+                        a(href="/blog/"+jay._id)!= jay.title
+                    div.body= jay.body
