@@ -1,0 +1,21 @@
+body {
+	behavior: url("ie/csshover3.htc");
+}
+.menu li .drop {
+	background:url("dropie.png") no-repeat right 13px;
+}
+.menu li:hover .drop {
+	background:url("dropiehover.png") no-repeat right 12px;
+}
+.menu li.nodrop:hover {
+	padding: 0px;
+}
+.menu li:hover .align_right {
+	right:-2px;
+}
+.menu li.right:hover .dropdown_fullwidth {
+	right:19px;
+}
+.menu .levels a.parent, .menu .levels a.parent:hover {
+	background: url("drop2ie.png") right center no-repeat;
+}
