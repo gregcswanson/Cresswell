@@ -1,0 +1,10 @@
+h1= title
+#jays
+    - each jay in jays
+        div.jay
+            div.created_at= jay.created_at
+            div.title
+                a(href="/jay/"+jay._id)!= jay.title
+            div.body= jay.body
+    p
+        a(href="/jays/new") new

@@ -18,7 +18,7 @@ TABLE OF CONTENTS
 
 
 body {
-	background:url("img/wood.jpg") repeat;
+    background:url("/images/img/wood.jpg") repeat;
 }
 
 
@@ -238,7 +238,7 @@ a.tooltip:hover span {
     background:none;
 }
 #footer_menu .imgmenu a { /* Used for the home item, text is here hidden and replaced by an image */
-    background:url("img/home.png") top left no-repeat;
+    background:url("/images/img/home.png") top left no-repeat;
     width:36px;
     height:30px;
 }
@@ -246,7 +246,7 @@ a.tooltip:hover span {
     background:none;
 }
 #footer_menu li.imgmenu a:hover {
-    background:url("img/home2.png") top left no-repeat;
+    background:url("/images/img/home2.png") top left no-repeat;
 }
 
 /* Drop Up */

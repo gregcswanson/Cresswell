@@ -1,22 +1,82 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DTS</title>
+        <link rel="stylesheet" href="stylesheets/footer.css" type="text/css" media="screen" /><!-- Footer Stylings -->
 
-<title>Pure CSS3 Sticky Footer</title>
+        <!-- The following code targets IE6 only and enables mouse hover on non-anchor tags -->
+        <!--[if IE 6]>
+        <link rel="stylesheet" type="text/css" href="htc/ie6.css" />
+        <![endif]-->
 
-<link rel="stylesheet" href="footer.css" type="text/css" media="screen" /><!-- Footer Stylings -->
+        <style type="text/css">
 
-<!-- The following code targets IE6 only and enables mouse hover on non-anchor tags -->
-<!--[if IE 6]>
-<link rel="stylesheet" type="text/css" href="htc/ie6.css" />
-<![endif]-->
+div.cornerDiv{
+    display: block;
+    position: absolute;
+    top: 5px;
+    height: 30px;
+    left: 5px;
+    right: 5px;  
+    margin:2px;
+    padding: 2px;
+    border: 1px solid #111111;
+	background:#191919; /* Fallback color for older browsers */
+	background: rgba(0,0,0,0.5);
+	/* CSS3 Stylings - Rounded Corners */
+	-moz-border-radius: 0px 10px 0px 0px;
+	-webkit-border-radius: 0px 10px 0px 0px;
+	border-radius: 0px 10px 0px 0px;
+}
 
-</head>
+div.contentDiv{
+    display: block;
+    position: absolute;
+    top: 41px;
+    bottom: 45px;
+    left: 5px;
+    right: 5px;  
+    margin:2px;
+    padding: 2px;
+    border: 1px solid #111111;
+    border-top: none;
+    background:#191919; /* Fallback color for older browsers */
+	background: rgba(105,105,105,0.5);
+	/* CSS3 Stylings - Rounded Corners */
+	-moz-border-radius: 0px 0px 0px 10px;
+	-webkit-border-radius: 0px 0px 0px 10px;
+	border-radius: 0px 0px 0px 10px;
+}
 
-<body>
+div.cornerDiv h1{
+    color: white;  
+    margin: 0px;
+    padding: 0px;
+}
 
+h4{
+    color: white;  
+    margin: 0px;
+    padding: 0px;
+}
 
+div.cornerDiv h2 {
+    display: block;
+    color: #cccccc;
+	text-decoration: none;
+}
+
+        </style>
+
+    </head>
+    <body>
+        <div class="cornerDiv">
+            <h2>header and controls</h2>
+        </div>
+        <div class="contentDiv">
+            <h4>content</h4>
+        </div>
+        
 <div id="footer"><!-- BEGIN FOOTER CONTAINER -->
 
 
@@ -85,7 +145,7 @@
                 
                 <div class="col_1">
                     <p class="black_box">This is a black box, you can use it to highligh some content. Sed sed lacus nulla, et lacinia risus.</p>
-        		</div>
+            	</div>
                 
                 <div class="col_2">
                     <p>Sed lacus est, iaculis sed sagittis ac, malesuada a felis. Vestibulum vitae dictum mauris. Aenean felis nisl, pulvinar quis blandit et, fermentum ut tortor. In condimentum nisi ut leo fermentum ornare. Praesent gravida venenatis felis sed egestas.</p>
@@ -99,13 +159,13 @@
                 
                 <div class="col_3">
                 	<!-- Examples of paragraphs with side images -->
-                    <p><img src="img/01.jpg" width="40" height="40" class="img_left imgshadow" alt="" />
+                    <p><img src="images/img/01.jpg" width="40" height="40" class="img_left imgshadow" alt="" />
                     Maecenas eget eros lorem, nec pellentesque lacus. Aenean dui orci, rhoncus sit amet tristique eu, tristique.<a href="#">Read more...</a></p>
-                    <p><img src="img/02.jpg" width="40" height="40" class="img_left imgshadow" alt="" />
+                    <p><img src="images/img/02.jpg" width="40" height="40" class="img_left imgshadow" alt="" />
                     Aliquam elementum felis quis felis consequat scelerisque. Fusce sed lectus at arcu mollis accumsan.<a href="#">Read more...</a></p>
-                    <p><img src="img/03.jpg" width="40" height="40" class="img_right imgshadow" alt="" />
+                    <p><img src="images/img/03.jpg" width="40" height="40" class="img_right imgshadow" alt="" />
                     Aliquam elementum felis quis felis consequat scelerisque. Fusce sed lectus at arcu mollis accumsan.<a href="#">Read more...</a></p>
-                    <p><img src="img/04.jpg" width="40" height="40" class="img_right imgshadow" alt="" />
+                    <p><img src="images/img/04.jpg" width="40" height="40" class="img_right imgshadow" alt="" />
                     Aliquam elementum felis quis felis consequat scelerisque. Fusce sed lectus at arcu mollis accumsan.<a href="#">Read more...</a></p>
                 </div>
                 
@@ -213,10 +273,10 @@
     <ul id="social"><!-- Social Icons -->
     
     	<!-- The span is the text appearing on hover, use the tooltip class in the link -->
-        <li><a href="#" class="tooltip"><img src='img/twitter.png' alt="" /><span>Twitter</span></a></li>
-        <li><a href="#" class="tooltip"><img src='img/rss.png' alt="" /><span>RSS</span></a></li>
-        <li><a href="#" class="tooltip"><img src='img/flickr.png' alt="" /><span>Flickr</span></a></li>
-        <li><a href="#" class="tooltip"><img src='img/facebook.png' alt="" /><span>Facebook</span></a></li>
+        <li><a href="#" class="tooltip"><img src='images/img/twitter.png' alt="" /><span>Twitter</span></a></li>
+        <li><a href="#" class="tooltip"><img src='images/img/rss.png' alt="" /><span>RSS</span></a></li>
+        <li><a href="#" class="tooltip"><img src='images/img/flickr.png' alt="" /><span>Flickr</span></a></li>
+        <li><a href="#" class="tooltip"><img src='images/img/facebook.png' alt="" /><span>Facebook</span></a></li>
         
     </ul><!-- End Social Icons -->
 
@@ -225,6 +285,5 @@
 </div><!-- END FOOTER CONTAINER -->
 
 
-
-</body>
+    </body>
 </html>

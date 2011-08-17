@@ -1,6 +1,7 @@
 var express = require('express');
-var models = require('./models');
-var JaysProvider = require('./jays-memory').JaysProvider;
+//var models = require('./models');
+//var JaysProvider = require('./jays-memory').JaysProvider;
+var JaysProvider = require('./jays-mongodb').JaysProvider;
 var app = module.exports = express.createServer();
 
 // Configuration
@@ -25,27 +26,42 @@ app.configure('production', function(){
    app.use(express.errorHandler()); 
 });
 
-var jayProvider = new JayProvider();
+//var jayProvider = new JayProvider();
+var jayProvider = new JayProvider('localhost',27017);
 
 // Routes
 
 app.get('/', function(req, res){
+    res.render('home.ejs', {
+        layout: false
+    });
+});
+
+app.get('/jays', function(req, res){
     jayProvider.findAll(function(error, jays)
     {
-        res.render('index.jade', { locals: {
-            layout: false,
+        res.render('jays.jade', { locals: {
             title: 'Blog',
             jays: jays
             }
         });
-        
     });
-    //models.getJay('a',function(jay){
-    //    res.render('start', {
-    //        layout: false,
-    //        title: jay.title
-    //    });
-    //});
+});
+
+app.get('/jays/new', function(req, res) {
+    res.render('jays_new.jade', { locals: {
+        title: 'New Jay'
+    }
+    });
+});
+
+app.post('/jays/new', function(req, res){
+    jayProvider.save({
+        title: req.param('title'),
+        body: req.param('body')
+    }, function( error, docs) {
+        res.redirect('/jays');
+    });
 });
 
 app.get('/m', function(req, res){
@@ -57,8 +73,14 @@ app.get('/m', function(req, res){
     });
 });
 
-app.get('/c', function(req, res){
-    res.render('cats', {
+app.get('/h', function(req, res){
+    res.render('home.ejs', {
+        layout: false
+    });
+});
+
+app.get('/cd', function(req, res){
+    res.render('countdown', {
         layout: false
     });
 });
