@@ -55,6 +55,17 @@ app.get('/jays/new', function(req, res) {
     });
 });
 
+app.get('/jay/:id', function(req, res) {
+    jayProvider.findById(req.params.id, function(error, jay) {
+        res.render('jay.jade',
+        { locals: {
+            title: jay.title,
+            jay: jay
+        }
+        });
+    });
+});
+
 app.post('/jays/new', function(req, res){
     jayProvider.save({
         title: req.param('title'),

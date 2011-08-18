@@ -4,7 +4,7 @@ h1= title
         div.jay
             div.created_at= jay.created_at
             div.title
-                a(href="/jay/"+jay._id)!= jay.title
+                a(href="/jay/"+jay._id.toHexString())!= jay.title
             div.body= jay.body
     p
         a(href="/jays/new") new
