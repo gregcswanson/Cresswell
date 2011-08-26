@@ -9,7 +9,11 @@ var app = module.exports = express.createServer();
 app.configure(function(){
    app.set('views', __dirname + '/views'); 
    app.set('view engine', 'ejs');
-   app.register(".html", require("jqtpl").express);
+   app.register(".html", require("ejs")); // Register EJS to process the server html
+   app.set('view options', {
+        open: '{{',
+        close: '}}'
+    }); // Change the open and close tags, no real reason
    app.use(express.bodyParser());
    app.use(express.methodOverride());
    app.use(express.cookieParser());
@@ -104,22 +108,45 @@ app.get('/jayson', function(req, res){
     });
 });
 
-app.get('/jayson/:id', function(req, res) {
-    jayProvider.findById(req.params.id, function(error, jay) {
-        res.send(jay);
-    });
-});
-
 app.get('/jayson/all', function(req, res) {
+    console.log("/jayson/all");
     jayProvider.findAll(function(error, jays)
     {
         res.send(
             {
+                success: true,
                 title: 'Blog',
-                jays: jays
+                data: jays
             }
         );
     });   
+});
+
+app.get('/jayson/:id', function(req, res) {
+    jayProvider.findById(req.params.id, function(error, jay) {
+        res.send(
+            {
+                success: true,
+                data: jay
+            }
+        );
+    });
+});
+
+app.post('/jayson/new', function(req, res){
+    jayProvider.save(
+        {
+            title: req.param('title'),
+            body: req.param('body')
+        }, 
+        function( error, docs) {
+            res.send(
+            {
+                success: true,
+                message: ''
+            }
+        );
+    });
 });
 
 app.listen(process.env.C9_PORT, "0.0.0.0");
