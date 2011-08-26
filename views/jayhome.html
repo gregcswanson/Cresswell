@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Jay JSON</title>
+        <link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.15/themes/redmond/jquery-ui.css" rel="stylesheet" type="text/css" />
+        <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.6.2.min.js"></script>
+        <script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.15/jquery-ui.min.js" type="text/javascript"></script>
+        <script src="http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js" type="text/javascript"></script>
+        <script src="http://cloud.github.com/downloads/SteveSanderson/knockout/knockout-1.1.2.js"></script>
+        <script src="../javascripts/jquery-knockout-select-plugin.js" type="text/javascript"></script>
+        <style type="text/css">
+
+        </style>
+        <!-- https://github.com/kof/node-jqtpl -->
+    </head>
+    <body>
+        <h1>${locals.title}</h1>
+        <p><span data-bind="text: title"></span></p>
+    </body>    
+    
+    <script type='text/javascript'>
+    
+        /* Knockout.js View Models */
+    
+        var viewModel = {
+            title: ko.observable('Jayson')
+        };
+        
+        ko.applyBindings(viewModel);        
+        
+        $( function () {
+           
+           alert('hi');
+           
+        });
+    
+    </script>
+    
+</html>

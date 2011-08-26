@@ -9,6 +9,7 @@ var app = module.exports = express.createServer();
 app.configure(function(){
    app.set('views', __dirname + '/views'); 
    app.set('view engine', 'ejs');
+   app.register(".html", require("jqtpl").express);
    app.use(express.bodyParser());
    app.use(express.methodOverride());
    app.use(express.cookieParser());
@@ -94,6 +95,31 @@ app.get('/cd', function(req, res){
     res.render('countdown', {
         layout: false
     });
+});
+
+app.get('/jayson', function(req, res){
+    res.render('jayhome.html', {
+        layout: false,
+        locals: { title: 'jQuery Templates' }
+    });
+});
+
+app.get('/jayson/:id', function(req, res) {
+    jayProvider.findById(req.params.id, function(error, jay) {
+        res.send(jay);
+    });
+});
+
+app.get('/jayson/all', function(req, res) {
+    jayProvider.findAll(function(error, jays)
+    {
+        res.send(
+            {
+                title: 'Blog',
+                jays: jays
+            }
+        );
+    });   
 });
 
 app.listen(process.env.C9_PORT, "0.0.0.0");
