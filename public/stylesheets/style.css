@@ -1,8 +1,85 @@
 body {
-    padding: 50px;
+    padding: 0;
+    margin: 0;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a{
     color: #00B7FF;
+}
+
+h1{
+    margin: 0;
+    padding: 0;
+ background: yellow;   
+}
+
+.details_layout div {
+    width: 24%;     
+    display: block;
+}
+
+.details_layout p {
+    display: inline;
+}
+
+.namecontainer {
+    margin:0 auto;
+    padding: 0;
+    width: 100%;
+    display: inline-block;
+    background: black;
+}
+
+.namebox {
+    margin: 10px;
+    float: left;
+    width: 50px;
+    height: 50px;
+    background: yellow;
+}
+
+.namecontainer2 {
+    margin: 0 auto;
+    text-align: centre;
+    padding: 0;
+    width: 100%;
+    display: inline-block;
+    background: black;
+}
+
+.namecontainer2 a {
+    color: yellow;
+}
+
+.namebox2 {
+    margin: 10px;
+    float: left;
+    width: 50px;
+    height: 50px;
+    background: yellow;
+}
+
+.boxcontainer {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    display: inline-block;
+    background: yellow;
+}
+
+.box {
+    margin: 10px;
+    float: left;
+    width: 50px;
+    height: 50px;
+    background: blue;
+}
+
+.selectedbox {
+    margin: 10px;
+    float: left;
+    width: 200px;
+    height: 200px;
+    background: gray;
 }
