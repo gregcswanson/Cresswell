@@ -37,12 +37,13 @@ var jayProvider = new JayProvider('localhost',27017);
 // Routes
 
 app.get('/', function(req, res){
+    //res.render('home.html', {
     res.render('layout.html',{
         layout: false
     });
 });
 
-app.get('/responsiveweb', function(req, res){
+app.get('/response', function(req, res){
     //res.render('home.html', {
     res.render('responsiveweb.html',{
         layout: false
