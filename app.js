@@ -157,4 +157,8 @@ app.post('/jayson/new', function(req, res){
     });
 });
 
-app.listen(process.env.C9_PORT, "0.0.0.0");
+//app.listen(process.env.C9_PORT, "0.0.0.0");
+var port = process.env.PORT || 3000;
+app.listen(port, function() {
+  console.log("Listening on " + port);
+});
