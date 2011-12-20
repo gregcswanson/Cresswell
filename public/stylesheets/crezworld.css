@@ -7,3 +7,10 @@ DIV.topbar-inner {
     height: 40px;  
     padding-left:20px;
 }
+
+DIV.counter-container {
+    padding-top: 30px;
+    height: 100px;
+    width: 560px;
+    margin: auto;   
+}

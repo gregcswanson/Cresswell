@@ -5,7 +5,7 @@
     var options = {
         iDate: [2021, 6, 8, 12, 30],
         timeZone: -7,
-        SkinName: 'images/default.png',
+        SkinName: '../../images/default.jpg',
         msg: ['Vegas Baby!', 'white', '170%', 'Trebuchet MS']
     };
 
