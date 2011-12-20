@@ -38,11 +38,21 @@ var jayProvider = new JayProvider('localhost',27017);
 
 app.get('/', function(req, res){
     //res.render('home.html', {
-    res.render('layout.html',{
-        layout: false
+    res.render('index.html',{
+        layout: 'layout.html',
+        page: 'home'
     });
 });
 
+app.get('/vegasreunion', function(req, res){
+    //res.render('home.html', {
+    res.render('vegasreunion.html',{
+        layout: 'layout.html',
+        page: 'vegasreunion'
+    });
+});
+
+/*
 app.get('/response', function(req, res){
     //res.render('home.html', {
     res.render('responsiveweb.html',{
@@ -156,6 +166,7 @@ app.post('/jayson/new', function(req, res){
         );
     });
 });
+*/
 
 //app.listen(process.env.C9_PORT, "0.0.0.0");
 var port = process.env.PORT || 3000;

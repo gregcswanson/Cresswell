@@ -1,0 +1,9 @@
+body {
+    padding-top: 60px;
+    font-family: 'Terminal Dosis', sans-serif;
+}
+            
+DIV.topbar-inner {
+    height: 40px;  
+    padding-left:20px;
+}
