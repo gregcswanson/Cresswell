@@ -1,0 +1,49 @@
+<div id="wallposts" class="container">
+    <div class="hero-unit">
+        <h2>Wall</h2>
+        <p>What database? This is in memory storage so say good by to your precious data</p>
+        <div>
+            <p>listing</p>
+            <button data-bind="click: refresh">refresh</button>
+            <p>message: <span data-bind="text: message"></span></p>
+        </div>
+        <div>
+            <p>Add Post</p>
+            <button data-bind="click: add">Add</button>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    // inline script, how non PR...
+    
+    // Data Access
+    amplify.request.define("get-wallposts", "ajax", {
+        url: "/api/wall/all",
+        dataType: "json",
+        type: "GET"
+    });
+
+    // View Model
+    function WallPostViewModel() {
+      var self = this;
+      self.message = ko.observable('N/A');
+      self.errorMessage = ko.observable('');
+      self.wallPosts = ko.observableArray();
+      self.refresh = function() {
+        amplify.request("get-wallposts",
+            function (data) {
+                self.message(data.message);
+            }
+        );
+      }
+      self.add = function() {
+            alert('add');   
+      }
+      
+    };
+    
+    ko.applyBindings(new WallPostViewModel(), document.getElementById('wallposts'));
+    
+    // jQuery
+    
+</script>

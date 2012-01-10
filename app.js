@@ -37,7 +37,6 @@ var jayProvider = new JayProvider('localhost',27017);
 // Routes
 
 app.get('/', function(req, res){
-    //res.render('home.html', {
     res.render('index.html',{
         layout: 'layout.html',
         page: 'home'
@@ -45,11 +44,27 @@ app.get('/', function(req, res){
 });
 
 app.get('/vegasreunion', function(req, res){
-    //res.render('home.html', {
     res.render('vegasreunion.html',{
         layout: 'layout.html',
         page: 'vegasreunion'
     });
+});
+
+app.get('/wall', function(req, res){
+    res.render('wall.html',{
+        layout: 'layout.html',
+        page: 'wall'
+    });
+});
+
+app.get('/api/wall/all', function(req, res){
+    res.send(
+            {
+                result: true,
+                message: 'not implemented',
+                data: 'test'
+            }
+        );
 });
 
 /*
