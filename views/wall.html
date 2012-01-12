@@ -4,8 +4,13 @@
         <p>What database? This is in memory storage so say good by to your precious data</p>
         <div>
             <p>listing</p>
-            <button data-bind="click: refresh">refresh</button>
+            <button class="btn" data-bind="click: refresh">all</button>
+            <button class="btn" data-bind="click: get">get</button>
+            <button class="btn" data-bind="click: update">update</button>
+            <button class="btn" data-bind="click: insert">insert</button>
+            <button class="btn" data-bind="click: del">delete</button>
             <p>message: <span data-bind="text: message"></span></p>
+            <p>data: <span data-bind="text: data"></span></p>
         </div>
         <div>
             <p>Add Post</p>
@@ -18,26 +23,95 @@
     
     // Data Access
     amplify.request.define("get-wallposts", "ajax", {
-        url: "/api/wall/all",
+        url: "/api/wall",
         dataType: "json",
         type: "GET"
+    });
+    
+    amplify.request.define("get-wallpost", "ajax", {
+        url: "/api/wall/{id}",
+        dataType: "json",
+        type: "GET"
+    });
+    
+    amplify.request.define("update-wallpost", "ajax", {
+        url: "/api/wall/{id}",
+        type: "PUT"
+    });
+    
+    amplify.request.define("insert-wallpost", "ajax", {
+        url: "/api/wall",
+        type: "POST"
+    });
+    
+    amplify.request.define("delete-wallpost", "ajax", {
+        url: "/api/wall/{id}",
+        type: "DELETE"
     });
 
     // View Model
     function WallPostViewModel() {
       var self = this;
       self.message = ko.observable('N/A');
+      self.data = ko.observable('N/A');
       self.errorMessage = ko.observable('');
       self.wallPosts = ko.observableArray();
       self.refresh = function() {
-        amplify.request("get-wallposts",
-            function (data) {
-                self.message(data.message);
-            }
-        );
+            amplify.request("get-wallposts",
+                function (data) {
+                    self.message(data.message);
+                    self.data(data.data);
+                }
+            );
       }
-      self.add = function() {
-            alert('add');   
+      self.get = function() {
+            amplify.request("get-wallpost",
+            {
+                id: "1"
+            },
+                function (data) {
+                    self.message(data.message);
+                    self.data(data.data);
+                }
+            );
+      }
+      self.update = function() {
+            amplify.request("update-wallpost",
+            {
+                id: "2",
+                title: "title 2",
+                body: "body 2"
+            },
+                function (data) {
+                    self.message(data.message);
+                    self.data(data.data);
+                }
+            );
+      }
+      
+      self.insert = function() {
+            amplify.request("insert-wallpost",
+            {
+                title: "title 3",
+                body: "body 3"
+            },
+                function (data) {
+                    self.message(data.message);
+                    self.data(data.data);
+                }
+            );
+      }
+      
+      self.del = function() {
+            amplify.request("delete-wallpost",
+            {
+                id: "4"
+            },
+                function (data) {
+                    self.message(data.message);
+                    self.data(data.data);
+                }
+            );
       }
       
     };

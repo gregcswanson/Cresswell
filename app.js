@@ -57,12 +57,54 @@ app.get('/wall', function(req, res){
     });
 });
 
-app.get('/api/wall/all', function(req, res){
+app.get('/api/wall', function(req, res){
     res.send(
             {
                 result: true,
-                message: 'not implemented',
-                data: 'test'
+                message: 'get not implemented',
+                data: 'all'
+            }
+        );
+});
+
+app.get('/api/wall/:id', function(req, res){
+    res.send(
+            {
+                result: true,
+                message: 'get not implemented',
+                data: 'get(' + req.params.id + ')'
+            }
+        );
+});
+
+app.put('/api/wall/:id', function(req, res){
+    var wallPost = {title: req.body.title , body: req.body.title.body};
+    res.send(
+            {
+                result: true,
+                message: 'put not implemented',
+                data: 'put(' + wallPost.title + ')'
+            }
+        );
+});
+
+app.post('/api/wall', function(req, res){
+    var wallPost = {title: req.body.title , body: req.body.title.body};
+    res.send(
+            {
+                result: true,
+                message: 'post not implemented',
+                data: 'post(' + wallPost.title + ')'
+            }
+        );
+});
+
+app.delete('/api/wall/:id', function(req, res){
+    res.send(
+            {
+                result: true,
+                message: 'delete not implemented',
+                data: 'delete(' + req.params.id + ')'
             }
         );
 });
