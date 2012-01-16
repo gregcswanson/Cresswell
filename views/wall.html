@@ -7,14 +7,19 @@
             <button class="btn" data-bind="click: refresh">all</button>
             <button class="btn" data-bind="click: get">get</button>
             <button class="btn" data-bind="click: update">update</button>
-            <button class="btn" data-bind="click: insert">insert</button>
             <button class="btn" data-bind="click: del">delete</button>
             <p>message: <span data-bind="text: message"></span></p>
             <p>data: <span data-bind="text: data"></span></p>
         </div>
         <div>
-            <p>Add Post</p>
-            <button data-bind="click: add">Add</button>
+            <form id="add-form" data-bind="submitWithValidate: insert">
+                
+                    <label for="title">Title</title>
+                    <input name="title" data-bind="value: newTitle" placeholder="Title" class="required" />
+                    <label for="post">Post</label>
+                    <input name="post" data-bind="value: newPost" placeholder="Post something" class="required" />
+                    <button class="btn" type="submit">Add</button>
+            </form>
         </div>
     </div>
 </div>
@@ -56,6 +61,8 @@
       self.data = ko.observable('N/A');
       self.errorMessage = ko.observable('');
       self.wallPosts = ko.observableArray();
+      self.newTitle = ko.observable('');
+      self.newPost = ko.observable('');
       self.refresh = function() {
             amplify.request("get-wallposts",
                 function (data) {
@@ -90,10 +97,11 @@
       }
       
       self.insert = function() {
+            
             amplify.request("insert-wallpost",
             {
-                title: "title 3",
-                body: "body 3"
+                title: self.newTitle(),
+                body: self.newPost()
             },
                 function (data) {
                     self.message(data.message);
