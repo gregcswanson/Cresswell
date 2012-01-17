@@ -80,6 +80,13 @@ app.get('/wall', function(req, res){
     });
 });
 
+app.get('/maps', function(req, res){
+    res.render('maps.html',{
+        layout: 'layout.html',
+        page: 'maps'
+    });
+});
+
 app.get('/api/wall', function(req, res){
     res.send(
             {
