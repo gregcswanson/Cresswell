@@ -2,7 +2,7 @@
     <div class="hero-unit">
         <h2>Wall</h2>
         <p>What database? This is in memory storage so say good by to your precious data</p>
-        <div>
+        <!-- <div>
             <p>listing</p>
             <button class="btn" data-bind="click: refresh">all</button>
             <button class="btn" data-bind="click: get">get</button>
@@ -20,6 +20,49 @@
                     <input name="post" data-bind="value: newPost" placeholder="Post something" class="required" />
                     <button class="btn" type="submit">Add</button>
             </form>
+        </div> -->
+    </div>
+    <div class="container">
+        <div>
+            <button class="btn" data-bind="click: refreshLevel1">load level 1</button>
+            <button class="btn" >load level 2</button>
+            <button class="btn" >load level 3 4</button>
+        </div>
+        <div class="row">
+            <div class="span4">
+                <h5><span data-bind="text: level1().name" /></h5>
+            </div>
+            <div class="span4">
+                <h5><span data-bind="text: level2().name" /></h5>
+            </div>
+            <div class="span4">
+                <h5><span data-bind="text: level3().name" /></h5>
+            </div>
+            <div class="span4">
+                <h5><span data-bind="text: level4().name" /></h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span4">
+                <ul class="unstyled" data-bind="foreach: level1s">
+                    <li data-bind="text: name, click: $root.selectLevel1"></li>
+                </ul>
+            </div>
+            <div class="span4">
+                <ul class="unstyled" data-bind="foreach: level2s">
+                    <li data-bind="text: name, click: $root.selectLevel2"></li>
+                </ul>
+            </div>
+            <div class="span4">
+                <ul class="unstyled" data-bind="foreach: level3s">
+                    <li data-bind="text: name, click: $root.selectLevel3"></li>
+                </ul>
+            </div>
+            <div class="span4">
+                <ul class="unstyled" data-bind="foreach: level4s">
+                    <li data-bind="text: name, click: $root.selectLevel4"></li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
@@ -53,14 +96,47 @@
         url: "/api/wall/{id}",
         type: "DELETE"
     });
+    
+    amplify.request.define("get-level1", "ajax", {
+        url: "/api/level1",
+        dataType: "json",
+        type: "GET"
+    });
+    
+    amplify.request.define("get-level2", "ajax", {
+        url: "/api/level2/{level1}",
+        dataType: "json",
+        type: "GET"
+    });
+    
+    amplify.request.define("get-level3", "ajax", {
+        url: "/api/level3/{level1}/{level2}",
+        dataType: "json",
+        type: "GET"
+    });
+    
+    amplify.request.define("get-level4", "ajax", {
+        url: "/api/level4/{level2}",
+        dataType: "json",
+        type: "GET"
+    });
 
     // View Model
     function WallPostViewModel() {
       var self = this;
+      self.nonSelected = ko.observable({id: "-1", name: "N/A"});
       self.message = ko.observable('N/A');
       self.data = ko.observable('N/A');
       self.errorMessage = ko.observable('');
       self.wallPosts = ko.observableArray();
+      self.level1s = ko.observableArray([{ id: "1", name: "Sample 1" }]);
+      self.level1 = ko.observable({id: "-1", name: "N/A"});
+      self.level2s = ko.observableArray([{ id: "1", name: "Sample 2" }]);
+      self.level2 = ko.observable({id: "-1", name: "N/A"});
+      self.level3s = ko.observableArray([{ id: "1", name: "Sample 3" }]);
+      self.level3 = ko.observable({id: "-1", name: "N/A"});
+      self.level4s = ko.observableArray([{ id: "1", name: "Sample 4" }]);
+      self.level4 = ko.observable({id: "-1", name: "N/A"});
       self.newTitle = ko.observable('');
       self.newPost = ko.observable('');
       self.refresh = function() {
@@ -121,6 +197,87 @@
                 }
             );
       }
+      self.refreshLevel1 = function() {
+            amplify.request("get-level1",
+                function (result) {
+                    self.level1s.removeAll();
+                    $.each(result.data, function (index, item) {
+                        self.level1s.push({id: item.id, name: item.name});
+                    });
+                    //  self.level1({id: self.level1s()[0].id, name: self.level1s()[0].name});
+                    self.selectLevel1(self.nonSelected());
+                }
+            );
+      }
+      self.selectLevel1 = function(level1) {
+             self.level1(level1);
+             self.level2s.removeAll();
+             if (self.level1().id > 0)
+             {
+                amplify.request("get-level2",
+                    {
+                        level1: self.level1().id
+                    },
+                    function (result) {
+                        self.level2s.removeAll();
+                        $.each(result.data, function (index, item) {
+                            self.level2s.push({id: item.id, name: item.name});
+                        });
+                        self.selectLevel2(self.nonSelected());
+                    }
+                );
+             } else {
+                self.selectLevel2(self.nonSelected());
+             }
+      }
+      self.selectLevel2 = function(level2) {
+             self.level2(level2);
+             self.level3s.removeAll();
+             self.level4s.removeAll();
+             // get level 3 data
+             if (self.level1().id > 0 && self.level2().id > 0)
+             {
+                amplify.request("get-level3",
+                    {
+                        level1: self.level1().id,
+                        level2: self.level2().id
+                    },
+                    function (result) {
+                        
+                        $.each(result.data, function (index, item) {
+                            self.level3s.push({id: item.id, name: item.name});
+                        });
+                        self.selectLevel3(self.nonSelected());
+                    }
+                );
+             } else {
+                self.selectLevel3(self.nonSelected());
+             }
+             if (self.level2().id > 0)
+             {
+                amplify.request("get-level4",
+                    {
+                        level2: self.level2().id
+                    },
+                    function (result) {
+                        
+                        $.each(result.data, function (index, item) {
+                            self.level4s.push({id: item.id, name: item.name});
+                        });
+                        self.selectLevel4(self.nonSelected());
+                    }
+                );
+             } else {
+                self.selectLevel4(self.nonSelected());
+             }
+      }
+      self.selectLevel3 = function(level3) {
+             //self.level3(level3);
+      }
+      self.selectLevel4 = function(level4) {
+             //self.level4(level4);
+      }
+      
       
     };
     

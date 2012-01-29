@@ -139,6 +139,54 @@ app.delete('/api/wall/:id', function(req, res){
         );
 });
 
+app.get('/api/level1', function(req, res){
+    res.send(
+            {
+                status: "success",
+                message: '',
+                data: [{id: '1', name: 'Level 1 (a)'},
+                    {id: '2', name: 'Level 1 (b)'},
+                    {id: '3', name: 'Level 1 (c)'}]
+            }
+        );
+});
+
+app.get('/api/level2/:level1', function(req, res){
+    res.send(
+            {
+                status: "success",
+                message: '',
+                data: [{id: '1', name: 'Level ' + req.params.level1 + ' (a)'},
+                    {id: '2', name: 'Level ' + req.params.level1 + ' (b)'},
+                    {id: '3', name: 'Level ' + req.params.level1 + ' (c)'}]
+            }
+        );
+});
+
+app.get('/api/level3/:level1/:level2', function(req, res){
+    res.send(
+            {
+                status: "success",
+                message: '',
+                data: [{id: '1', name: 'Level ' + req.params.level1 + '.' + req.params.level2 + ' (a)'},
+                    {id: '2', name: 'Level ' + req.params.level1 + '.' + req.params.level2 + ' (b)'},
+                    {id: '3', name: 'Level ' + req.params.level1 + '.' + req.params.level2 + ' (c)'}]
+            }
+        );
+});
+
+app.get('/api/level4/:level2', function(req, res){
+    res.send(
+            {
+                status: "success",
+                message: '',
+                data: [{id: '1', name: 'Level ' + req.params.level2 + ' (a)'},
+                    {id: '2', name: 'Level ' + req.params.level2 + ' (b)'},
+                    {id: '3', name: 'Level ' + req.params.level2 + ' (c)'}]
+            }
+        );
+});
+
 /*
 app.get('/response', function(req, res){
     //res.render('home.html', {

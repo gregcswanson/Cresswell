@@ -16,7 +16,8 @@
       ['Coogee Beach', -33.923036, 151.259052, 5],
       ['Cronulla Beach', -34.028249, 151.157507, 3],
       ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
-      ['Maroubra Beach', -33.950198, 151.259302, 1]
+      ['Maroubra Beach', -33.950198, 151.259302, 1],
+      ['Newcastle Beach', 0, 0, 6]
     ];
     
     //var locations = [
@@ -36,12 +37,13 @@
 
     var bounds = new google.maps.LatLngBounds(); // get the initial map boundry
     for (i = 0; i < locations.length; i++) {  
-      marker = new google.maps.Marker({
-        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-        map: map,
-        title: locations[i][0]
-      });
-      
+        if (locations[i][1] != 0){
+            marker = new google.maps.Marker({
+                position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                map: map,
+                title: locations[i][0]
+            });
+        } 
         bounds.extend(marker.getPosition()); // extend the boundary to fit this marker
         
       google.maps.event.addListener(marker, 'click', (function(marker, i) {
