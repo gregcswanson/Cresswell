@@ -84,4 +84,9 @@ h1{
     background: gray;
 }
 
+.footer-large-desktop, .footer-desktop, .footer-tablet, .footer-phone
+{
+    display: none;
+}
+
 

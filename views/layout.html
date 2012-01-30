@@ -2,8 +2,10 @@
 <html lang="en">
     <head>
         <title>crezworld.</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0;">
         <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.3.0/bootstrap.css">
         <link rel="stylesheet" href="../stylesheets/crezworld.css">
+        <link rel="stylesheet" href="../stylesheets/Media.css">
         <link href='http://fonts.googleapis.com/css?family=Terminal+Dosis' rel='stylesheet' type='text/css'>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
         <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
@@ -32,5 +34,11 @@
             </div>
         </div>
         {{- body}}
+        <div class="container">
+            <div class="footer-large-desktop"><p>-Large Desktop Media Query-</p></div>
+            <div class="footer-desktop"><p>-Desktop Media Query-</p></div>
+            <div class="footer-tablet"><p>-Tablet Media Query-</p></div>
+            <div class="footer-phone"><p>-Phone Media Query-</p></div>
+        </div>
     </body>
 </html>

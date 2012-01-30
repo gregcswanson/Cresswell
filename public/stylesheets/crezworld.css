@@ -14,3 +14,8 @@ DIV.counter-container {
     width: 560px;
     margin: auto;   
 }
+
+.footer-large-desktop, .footer-desktop, .footer-tablet, .footer-phone
+{
+    display: none;
+}
