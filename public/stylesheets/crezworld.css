@@ -15,7 +15,7 @@ DIV.counter-container {
     margin: auto;   
 }
 
-.footer-large-desktop, .footer-desktop, .footer-tablet, .footer-phone
+.footer-large-desktop, .footer-desktop, .footer-tablet, .footer-phone, .footer-tablet-ipad-landscape, .footer-tablet-ipad-portrait
 {
     display: none;
 }

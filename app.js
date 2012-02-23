@@ -80,6 +80,13 @@ app.get('/wall', function(req, res){
     });
 });
 
+app.get('/notes', function(req, res){
+    res.render('notes.html',{
+        layout: 'layout.html',
+        page: 'notes'
+    });
+});
+
 app.get('/maps', function(req, res){
     res.render('maps.html',{
         layout: 'layout.html',
