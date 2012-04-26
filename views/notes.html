@@ -49,8 +49,9 @@
         <div class="notes-container">
             <div class="lines"></div>
             <ul class="list">
-                <li>Note 1</li>
-                <li>Note 2</li>
+                {{ for(var i=0; i<items.length; i++) { }}
+                    <li>{{= items[i].title }}</li>
+                {{ } }}
             </ul>
         </div>
     </div>

@@ -1,0 +1,17 @@
+<script src="../javascripts/viewmodels/appViewModel.js" type="text/javascript"></script>    
+        
+<div id="application-menu">
+    <h6>menu</h6>
+</div>
+<div id="app">
+	<h1>Application</h1>
+	<p><span data-bind="text: message"></span></p>
+	<button class="btn small" data-bind="click: openPage1, enable: openPagesEnabled">Page 1</button>
+	<button class="btn small" data-bind="click: openPage2, enable: openPagesEnabled">Page 2</button>
+	
+</div>
+<div id="pages">
+</div>
+<div id="loading" style="display: none;">
+	<h6>loading...</h6>
+</div>

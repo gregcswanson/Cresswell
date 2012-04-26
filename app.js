@@ -1,8 +1,14 @@
-var express = require('express');
-var everyauth = require('everyauth');
+var express = require('express'), 
+    Db = require('mongodb').Db, 
+    Server = require('mongodb').Server,
+    Connection = require('mongodb').Connection;
+    
+//var everyauth = require('everyauth');
 //var models = require('./models');
 //var JaysProvider = require('./jays-memory').JaysProvider;
 var JaysProvider = require('./jays-mongodb').JaysProvider;
+
+console.log("starting application ");
 
 //everyauth.google
 //  .appId('YOUR CLIENT ID HERE')
@@ -24,7 +30,18 @@ var JaysProvider = require('./jays-mongodb').JaysProvider;
 //  })
 //  .redirectPath('/');
 
+//mongodb://test:test123@flame.mongohq.com:27106/cloud
+var db = new Db('cloud', new Server('flame.mongohq.com', 27106, {}), {auto_reconnect: true});
+
+
+    
 var app = module.exports = express.createServer();
+
+//db.open(function(err, db){
+//    if (err){
+//        console.log(err);
+//    }
+//});
 
 // Configuration
 
@@ -40,7 +57,7 @@ app.configure(function(){
    app.use(express.methodOverride());
    app.use(express.cookieParser());
    app.use(express.session({ secret: 'CrezwellInVegas2021' }));
-   app.use(everyauth.middleware());
+   //app.use(everyauth.middleware());
    app.use(app.router);
    app.use(express.static(__dirname + '/public'));
 });
@@ -55,7 +72,7 @@ app.configure('production', function(){
 });
 
 //var jayProvider = new JayProvider();
-var jayProvider = new JayProvider('localhost',27017);
+//var jayProvider = new JayProvider('localhost',27017);
 
 // Routes
 
@@ -73,6 +90,13 @@ app.get('/vegasreunion', function(req, res){
     });
 });
 
+app.get('/app', function(req, res){
+    res.render('app.html',{
+        layout: 'layout.html',
+        page: 'app'
+    });
+});
+
 app.get('/wall', function(req, res){
     res.render('wall.html',{
         layout: 'layout.html',
@@ -81,9 +105,14 @@ app.get('/wall', function(req, res){
 });
 
 app.get('/notes', function(req, res){
-    res.render('notes.html',{
-        layout: 'layout.html',
-        page: 'notes'
+    db.collection('jays', function(err, collection) {
+        collection.find({}).toArray(function(err, items) {
+            res.render('notes.html',{
+                layout: 'layout.html',
+                page: 'notes',
+                items: items
+            });
+        });
     });
 });
 
@@ -312,6 +341,25 @@ app.post('/jayson/new', function(req, res){
 
 //app.listen(process.env.C9_PORT, "0.0.0.0");
 var port = process.env.PORT || 3000;
-app.listen(port, function() {
-  console.log("Listening on " + port);
+
+db.open(function(err) {
+    console.log('authenticating');
+    db.authenticate(
+        'test', 
+        'test123', 
+        function(err) {
+            if (err) {
+               console.log(err);
+            } else {
+                console.log('connected to mongoDb - cloud');
+                app.listen(port, function() {
+                    console.log("Listening on " + port);
+                });
+            }
+        }
+    );
 });
+
+//app.listen(port, function() {
+//  console.log("Listening on " + port);
+//});
