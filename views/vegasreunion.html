@@ -1,9 +1,110 @@
+<style type="text/css">
+.counter-value{
+    display:inline-block;
+    margin: 2px;
+    padding: 10px 10px 2px 10px;
+    background-color:black;
+}
+.counter-value p {
+    color:white;
+    margin: 0;
+    padding: 0;
+    font-size: 26px;
+}
+.counter-value h6 {
+    color:white;
+    margin: 0;
+    padding: 0;
+    clear: none;
+}
+
+/* Phone Size ----------- */
+@media only screen and (min-width : 200px) and (max-width : 479px) {
+    .counter-value{
+        display:block;
+        width: 80px;
+        margin: 2px auto;
+    }
+}
+
+</style>
 <div class="container">
-    <div class="hero-unit">
-        <h2>Vegas Re-union in...</h2>
-        <div class="counter-container">
+    <div class="hhero-unit">
+        
+        <!-- <div class="counter-container">
             <div id="jsCount"></div>
+        </div> -->
+        
+        <div style="text-align:center;">
+            <h2>Vegas Re-union in...</h2>
+        
+            <div class="counter-value">
+                <p id="counter-days">1</p>
+                <h6>days</h6>
+            </div>
+            <div class="counter-value">
+                <p id="counter-hours">1</p>
+                <h6>hours</h6>
+            </div>
+            <div class="counter-value">
+                <p id="counter-minutes">1</p>
+                <h6>minutes</h6>
+            </div>
+            <div class="counter-value">
+                <p id="counter-seconds">1</p>
+                <h6>seconds</h6>
+            </div>
         </div>
     </div>
 </div>
-<script src="../javascripts/unc-jsCount.js" type="text/javascript"></script>
+<!-- <script src="../javascripts/unc-jsCount.js" type="text/javascript"></script> -->
+<script type="text/javascript">
+(function ($) {
+    $(function () {
+        
+        bTt = function(arg) {
+    		num = arg<10 ? '0'+arg : ''+arg;
+			return num;
+		};
+
+        p = function() {
+            var today = new Date(),
+                target = new Date(2021, 6-1, 8, 12, 30),
+                timeZ = (-7 - (-today.getTimezoneOffset()/60))*3600000;
+            var counter = target.getTime() - today.getTime() - timeZ;
+            var s = Math.floor(counter/1000),
+    			m = Math.floor(s/60),
+				h = Math.floor(m/60),
+				d = Math.floor(h/24);
+            
+            if(counter>0) {
+
+                s = bTt(s % 60);
+    			m = bTt(m % 60);
+				h = bTt(h % 24);
+				d = (d.length<2) ? '00'+d : (d.length<3) ? '0'+d : d;
+
+                $('#counter').text(counter);;
+                $('#counter-days').text(d);
+                $('#counter-hours').text(h);
+                $('#counter-minutes').text(m);
+                $('#counter-seconds').text(s);
+
+
+			} else {
+                $('#counter').text('done!');
+                $('#counter-days').text('0');
+                $('#counter-hours').text('0');
+                $('#counter-minutes').text('0')
+                $('#counter-seconds').text('0');
+			}
+                
+            
+            var t = setTimeout(p, 1000);
+        };
+
+        p();
+
+    });
+})(jQuery);
+</script>
