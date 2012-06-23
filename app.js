@@ -160,4 +160,72 @@ app.delete('/api/wall/:id', function(req, res){
         );
 });
 
-app.get('/a
+app.get('/api/level1', function(req, res){
+    res.send(
+            {
+                status: "success",
+                message: '',
+                data: [{id: '1', name: 'Level 1 (a)'},
+                    {id: '2', name: 'Level 1 (b)'},
+                    {id: '3', name: 'Level 1 (c)'}]
+            }
+        );
+});
+
+app.get('/api/level2/:level1', function(req, res){
+    res.send(
+            {
+                status: "success",
+                message: '',
+                data: [{id: '1', name: 'Level ' + req.params.level1 + ' (a)'},
+                    {id: '2', name: 'Level ' + req.params.level1 + ' (b)'},
+                    {id: '3', name: 'Level ' + req.params.level1 + ' (c)'}]
+            }
+        );
+});
+
+app.get('/api/level3/:level1/:level2', function(req, res){
+    res.send(
+            {
+                status: "success",
+                message: '',
+                data: [{id: '1', name: 'Level ' + req.params.level1 + '.' + req.params.level2 + ' (a)'},
+                    {id: '2', name: 'Level ' + req.params.level1 + '.' + req.params.level2 + ' (b)'},
+                    {id: '3', name: 'Level ' + req.params.level1 + '.' + req.params.level2 + ' (c)'}]
+            }
+        );
+}); 
+ 
+app.get('/api/level4/:level2', function(req, res){
+    res.send(
+            {
+                status: "success",
+                message: '',
+                data: [{id: '1', name: 'Level ' + req.params.level2 + ' (a)'},
+                    {id: '2', name: 'Level ' + req.params.level2 + ' (b)'},
+                    {id: '3', name: 'Level ' + req.params.level2 + ' (c)'}]
+            }
+        );
+});
+
+//app.listen(process.env.C9_PORT, "0.0.0.0");
+var port = process.env.PORT || 3000;
+
+db.open(function(err) {
+    console.log('authenticating');
+    db.authenticate(
+        'test', 
+        'test123', 
+        function(err) {
+            if (err) {
+               console.log(err);
+            } else {
+                console.log('connected to mongoDb - cloud');
+                app.listen(port, function() {
+                    console.log("Listening on " + port);
+                });
+            }
+        }
+    );
+});
+
