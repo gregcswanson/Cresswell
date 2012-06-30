@@ -45,7 +45,7 @@ app.get('/', function(req, res){
 
 app.get('/vegasreunion', function(req, res){
     res.render('vegasreunion.html', {
-        layout: 'layout.html',
+        layout: 'layout-clean.html',
         page: 'vegasreunion'
     });
 });
@@ -228,4 +228,3 @@ db.open(function(err) {
         }
     );
 });
-
